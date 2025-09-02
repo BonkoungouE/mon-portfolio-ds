@@ -12,11 +12,11 @@ const Tooltip = Recharts.Tooltip as unknown as React.ComponentType<any>;
 
 
 const INFO = {
-  nom: 'Prénom Nom',
-  titre: 'Data Scientist',
-  localisation: 'Ville, Pays',
+  nom: 'Emmanuel BONKOUNGOU',
+  titre: 'Ingenieur Statisticien Economiste specialisé en Data Science et Marketing',
+  localisation: 'Ouagadougou, Burkina Faso',
   pitch: "Je conçois des modèles de machine learning orientés impact et des produits data. J'aime transformer des données en décisions.",
-  email: 'email.pro@example.com',
+  email: 'emmanuelbonkoungou97@gmail.com',
   github: 'https://github.com/username',
   linkedin: 'https://www.linkedin.com/in/username/',
   cvUrl: '#',
@@ -110,14 +110,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 )
 
 function Header() {
-  const [dark, setDark] = useState(true)
-  React.useEffect(() => {
-    if (dark) document.documentElement.classList.add('dark')
-    else document.documentElement.classList.remove('dark')
-  }, [dark])
-
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/70 backdrop-blur dark:bg-neutral-900/60">
+    <header className="sticky top-0 z-50 border-b bg-white/70 backdrop-blur">
       <Container>
         <div className="flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
@@ -126,12 +120,9 @@ function Header() {
             <span className="rounded-full border px-2 py-0.5 text-xs">{INFO.titre}</span>
           </div>
           <div className="flex items-center gap-2">
-            <a href={INFO.github} target="_blank" className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800"><Github className="h-5 w-5" /></a>
-            <a href={INFO.linkedin} target="_blank" className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800"><Linkedin className="h-5 w-5" /></a>
-            <a href={`mailto:${INFO.email}`} className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800"><Mail className="h-5 w-5" /></a>
-            <button aria-label="Basculer le thème" onClick={() => setDark(d => !d)} className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800">
-              {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
+            <a href={INFO.github} target="_blank" className="p-2 rounded-xl hover:bg-neutral-100"><Github className="h-5 w-5" /></a>
+            <a href={INFO.linkedin} target="_blank" className="p-2 rounded-xl hover:bg-neutral-100"><Linkedin className="h-5 w-5" /></a>
+            <a href={`mailto:${INFO.email}`} className="p-2 rounded-xl hover:bg-neutral-100"><Mail className="h-5 w-5" /></a>
           </div>
         </div>
       </Container>
@@ -141,31 +132,30 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="border-b bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-950">
+    <section className="border-b bg-white">
       <Container>
         <div className="grid gap-8 py-10 md:grid-cols-2 md:py-16">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Salut, moi c'est {INFO.nom}</h1>
-            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-300">{INFO.pitch}</p>
+            <p className="mt-4 text-lg text-neutral-600">{INFO.pitch}</p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a href={INFO.cvUrl} target="_blank" className="rounded-2xl bg-neutral-900 px-4 py-2 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900">Télécharger mon CV</a>
-              <span className="text-sm text-neutral-600 dark:text-neutral-300 inline-flex items-center"><MapPin className="mr-1 h-4 w-4" /> {INFO.localisation}</span>
+              <a href={INFO.cvUrl} target="_blank" className="rounded-2xl bg-neutral-900 px-4 py-2 text-white hover:opacity-90">Télécharger mon CV</a>
+              <span className="inline-flex items-center text-sm text-neutral-600"><MapPin className="mr-1 h-4 w-4" /> {INFO.localisation}</span>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="rounded-2xl border p-4">
               <h3 className="mb-2 text-lg font-semibold">Compétences clés</h3>
-                <div className="h-56 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={COMPETENCES} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
-                        <XAxis dataKey="name" angle={-20} textAnchor="end" height={50} interval={0} tick={{ fontSize: 11 }} />
-                        <YAxis domain={[0, 100]} tickFormatter={(v: number) => `${v}%`} />
-                        {/* Si jamais ça re-crée un warning, commente la ligne suivante */}
-                        <Tooltip formatter={(v: number) => `${v}%`} />
-                        <Bar dataKey="level" radius={[6, 6, 0, 0]} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    </div>
+              <div className="h-56 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={COMPETENCES} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
+                    <XAxis dataKey="name" angle={-20} textAnchor="end" height={50} interval={0} tick={{ fontSize: 11 }} />
+                    <YAxis domain={[0, 100]} tickFormatter={(v: number) => `${v}%`} />
+                    <Tooltip formatter={(v: number) => `${v}%`} />
+                    <Bar dataKey="level" radius={[6, 6, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {TAGS.map(t => <span key={t} className="rounded-full border px-2 py-1 text-xs">{t}</span>)}
               </div>
@@ -193,7 +183,7 @@ function Projets() {
   }, [query, tri, filtreTag])
 
   return (
-    <section className="border-b py-12 md:py-16">
+    <section className="border-b py-12 md:py-16 bg-white">
       <Container>
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Projets</h2>
@@ -209,7 +199,7 @@ function Projets() {
               <option value="">Filtrer par tag</option>
               {Array.from(new Set(PROJETS.flatMap(p => p.tags))).map(t => <option key={t} value={t}>{t}</option>)}
             </select>
-            <button onClick={() => { setFiltreTag(null); setQuery(''); setTri('etoiles') }} className="rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800">Réinitialiser</button>
+            <button onClick={() => { setFiltreTag(null); setQuery(''); setTri('etoiles') }} className="rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50">Réinitialiser</button>
           </div>
         </div>
 
@@ -225,17 +215,17 @@ function Projets() {
                   <div className="font-semibold">{p.titre}</div>
                   <div className="flex items-center text-amber-500">{Array.from({ length: p.etoiles }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div>
                 </div>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300">{p.resume}</p>
+                <p className="text-sm text-neutral-600">{p.resume}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {p.tags.map(t => <span key={t} className="rounded-full border px-2 py-1 text-xs">{t}</span>)}
                 </div>
-                <div className="mt-4 flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                <div className="mt-4 flex items-center gap-2 text-sm text-neutral-600">
                   <span className="rounded-full border px-2 py-0.5 text-xs">Impact</span>
                   <span>{p.impact}</span>
                 </div>
                 <div className="mt-4 flex gap-2">
-                  <a href={p.liens.code} target="_blank" className="rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 inline-flex items-center gap-2"><Github className="h-4 w-4" /> Code</a>
-                  <a href={p.liens.demo} target="_blank" className="rounded-xl bg-neutral-900 px-3 py-2 text-sm text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 inline-flex items-center gap-2"><ExternalLink className="h-4 w-4" /> Démo</a>
+                  <a href={p.liens.code} target="_blank" className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm hover:bg-neutral-50"><Github className="h-4 w-4" /> Code</a>
+                  <a href={p.liens.demo} target="_blank" className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-3 py-2 text-sm text-white hover:opacity-90"><ExternalLink className="h-4 w-4" /> Démo</a>
                 </div>
               </div>
             </motion.div>
@@ -248,18 +238,18 @@ function Projets() {
 
 function Experience() {
   return (
-    <section className="border-b bg-neutral-50 py-12 dark:bg-neutral-950 md:py-16">
+    <section className="border-b py-12 md:py-16 bg-white">
       <Container>
         <h2 className="mb-8 text-2xl font-semibold tracking-tight md:text-3xl">Expérience</h2>
         <div className="space-y-6">
           {EXPERIENCES.map(e => (
             <div key={e.poste} className="rounded-2xl border p-4">
               <div className="mb-1 flex flex-wrap items-center gap-2 text-lg font-semibold"><Building2 className="h-5 w-5" /> {e.poste} · {e.entreprise}</div>
-              <div className="mb-2 flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-300">
+              <div className="mb-2 flex flex-wrap items-center gap-4 text-sm text-neutral-600">
                 <span className="inline-flex items-center"><Calendar className="mr-1 h-4 w-4" /> {e.date}</span>
                 <span className="inline-flex items-center"><MapPin className="mr-1 h-4 w-4" /> {e.lieu}</span>
               </div>
-              <ul className="list-inside list-disc space-y-1 text-sm text-neutral-700 dark:text-neutral-200">
+              <ul className="list-inside list-disc space-y-1 text-sm text-neutral-700">
                 {e.points.map(p => <li key={p}>{p}</li>)}
               </ul>
             </div>
@@ -272,14 +262,14 @@ function Experience() {
 
 function Formation() {
   return (
-    <section className="border-b py-12 md:py-16">
+    <section className="border-b py-12 md:py-16 bg-white">
       <Container>
         <h2 className="mb-6 text-2xl font-semibold tracking-tight md:text-3xl">Formation & Certifications</h2>
         <div className="grid gap-6 sm:grid-cols-2">
           {FORMATION.map((f) => (
             <div key={f.titre} className="rounded-2xl border p-4">
               <div className="text-lg font-semibold">{f.titre}</div>
-              <div className="mt-1 flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
+              <div className="mt-1 flex items-center justify-between text-sm text-neutral-600">
                 <span>{f.etab}</span><span>{f.date}</span>
               </div>
             </div>
@@ -292,7 +282,7 @@ function Formation() {
 
 function Publications() {
   return (
-    <section className="border-b bg-neutral-50 py-12 dark:bg-neutral-950 md:py-16">
+    <section className="border-b py-12 md:py-16 bg-white">
       <Container>
         <h2 className="mb-6 text-2xl font-semibold tracking-tight md:text-3xl">Publications & Contributions</h2>
         <div className="grid gap-6 sm:grid-cols-2">
@@ -301,7 +291,7 @@ function Publications() {
               <a href={a.lien} target="_blank" className="inline-flex items-center gap-2 font-semibold hover:underline">
                 <LinkIcon className="h-4 w-4" /> {a.titre}
               </a>
-              <div className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{a.annee}</div>
+              <div className="mt-2 text-sm text-neutral-600">{a.annee}</div>
             </div>
           ))}
         </div>
@@ -314,15 +304,15 @@ export default function PortfolioFR() {
   const [onglet, setOnglet] = useState<'projets' | 'experience' | 'plus'>('projets')
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 antialiased dark:bg-neutral-900 dark:text-neutral-100">
+    <div className="min-h-screen bg-white text-neutral-900 antialiased">
       <Header />
       <main>
         <Hero />
-        <section className="border-b py-12 md:py-16">
+        <section className="border-b py-12 md:py-16 bg-white">
           <Container>
             <div className="mb-6 grid w-full grid-cols-3 rounded-2xl border p-1 text-sm">
               {(['projets','experience','plus'] as const).map(key => (
-                <button key={key} onClick={() => setOnglet(key)} className={`rounded-xl px-3 py-2 ${onglet===key ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900' : ''}`}>
+                <button key={key} onClick={() => setOnglet(key)} className={`rounded-xl px-3 py-2 ${onglet===key ? 'bg-neutral-900 text-white' : ''}`}>
                   {key === 'projets' ? 'Projets' : key === 'experience' ? 'Expérience' : 'Publications & Formation'}
                 </button>
               ))}
@@ -332,11 +322,11 @@ export default function PortfolioFR() {
             {onglet === 'plus' && (<><Publications /><Formation /></>)}
           </Container>
         </section>
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16 bg-white">
           <Container>
             <div className="rounded-2xl border p-4">
               <h3 className="mb-2 text-lg font-semibold">Contact</h3>
-              <p className="text-sm text-neutral-700 dark:text-neutral-200">Intéressé·e par une collaboration ? Écrivez-moi.</p>
+              <p className="text-sm text-neutral-700">Intéressé·e par une collaboration ? Écrivez-moi.</p>
               <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
                 <span className="inline-flex items-center gap-1 rounded-full border px-2 py-1"><Mail className="h-4 w-4" /> {INFO.email}</span>
                 <a className="inline-flex items-center gap-1 rounded-full border px-2 py-1" href={INFO.github} target="_blank"><Github className="h-4 w-4" /> GitHub</a>
@@ -346,7 +336,7 @@ export default function PortfolioFR() {
           </Container>
         </section>
       </main>
-      <footer className="border-t py-8 text-center text-sm text-neutral-600 dark:text-neutral-300">
+      <footer className="border-t py-8 text-center text-sm text-neutral-600">
         <Container>
           <div className="flex flex-col items-center gap-2">
             <div className="flex items-center gap-2">
@@ -363,3 +353,4 @@ export default function PortfolioFR() {
     </div>
   )
 }
+
