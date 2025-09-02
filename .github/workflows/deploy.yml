@@ -20,15 +20,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 20             # ⬅️ pas de "cache: 'npm'"
 
-      # ⬇️ utiliser npm install quand on n'a pas de lockfile
       - name: Install
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund   # ⬅️ pas "npm ci"
 
       - name: Compute base for GH Pages
         run: |
